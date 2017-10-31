@@ -19,10 +19,28 @@ None
 
 Role Variables
 --------------
+Below is a list of default role variables that can be overridden. Have a look at [defaults/main.yml](defaults/main.yml) for the definitive list of variables.
 
-Have a look at the [defaults/main.yml](defaults/main.yml) for variables that can be overridden.
+* prometheus_version: 1.8.0
+* prometheus_config_dir: /etc/prometheus
+* prometheus_db_dir: /var/lib/prometheus
+* prometheus_root_dir: /opt/prometheus
+* prometheus_interface: "{{ ansible_default_ipv4.interface }}"
+* prometheus_web_listen_address: "0.0.0.0:9090"
+* prometheus_web_external_url: 'http://localhost:9090'
+* prometheus_alertmanager_url: 'localhost:9093'
+* prometheus_global_scrape_interval: 15s
+* prometheus_global_scrape_timeout: 10s
+* prometheus_global_evaluation_interval: 15s
+* prometheus_config_flags_extra: {}
+* prometheus_external_labels:
+  environment: "{{ ansible_domain }}"
+* prometheus_rules_files: []
+* prometheus_targets_dns: []
+* prometheus_targets: []
+* prometheus_custom_config_path: ''
 
-Use the variable prometheus_custom_config_path to provide your own prometheus.yml configuration. This is useful when you want to discard the default configuration provided by this Ansible role. The role first looks for the file prometheus.yml.j2 file in provided path. If not found, the role uses the default configuration.
+Use the variable *prometheus_custom_config_path* to provide your own *prometheus.yml* configuration. This is useful when you want to discard the default configuration provided by this Ansible role. The role first looks for the file *prometheus.yml.j2* file in the provided path. If not found, the role uses the default configuration.
 
 Example usage
 -------------
