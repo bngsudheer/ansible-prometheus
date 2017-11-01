@@ -35,3 +35,5 @@ prometheus_targets: []
 #    job: node
 
 prometheus_custom_config_path: ''
+
+prometheus_src_rules_directory: "rules/"

@@ -1,13 +1,14 @@
 ---
 - name: copy rule files to prometheus
   copy:
-    src: "rules/"
+    src: "{{ prometheus_src_rules_directory }}"
     dest: "{{ prometheus_config_dir }}/rules"
     owner: prometheus
     group: prometheus
     mode: 0644
     validate: "{{ prometheus_root_dir }}/promtool check-rules %s"
-  when: prometheus_rules_files != [] and prometheus_alertmanager_url != ""
+  when: 
+    - (prometheus_rules_files != [] and prometheus_alertmanager_url != "") or (prometheus_custom_config_path != "") 
   notify:
     - reload prometheus
 
